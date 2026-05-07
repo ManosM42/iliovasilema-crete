@@ -72,7 +72,7 @@ function PlaceDetail() {
             </div>
 
             <motion.div {...stagger(3)} className="overflow-hidden border border-border">
-              <MiniMap center={35.28684467614894, 25.23216634083281} markerLabel={place.name} className="w-full h-[400px]" />
+              <MiniMap center={place.coords} markerLabel={place.name} className="w-full h-[400px]" />
             </motion.div>
           </div>
         </div>

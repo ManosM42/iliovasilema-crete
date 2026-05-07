@@ -11,8 +11,8 @@ export function Footer() {
         </div>
         <div className="text-sm space-y-2">
           <div>Heraklion · Crete · Greece</div>
-          <div>+30 281 000 0000</div>
-          <div>hello@iliovasilema.gr</div>
+          <div>+30 697 862 5195</div>
+          <div>liakastelli@yahoo.gr</div>
         </div>
         <div className="text-sm md:text-right opacity-60">
           © {new Date().getFullYear()} Iliovasilema. {t("footer.rights")}.
