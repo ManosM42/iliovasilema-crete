@@ -1,0 +1,148 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Jost:wght@300;400;500;600&display=swap');
+@import "leaflet/dist/leaflet.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-sans: 'Jost', sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sand: var(--sand);
+  --color-sand-deep: var(--sand-deep);
+  --color-ivory: var(--ivory);
+  --color-charcoal: var(--charcoal);
+  --color-sage: var(--sage);
+}
+
+:root {
+  --radius: 0.25rem;
+  /* Brand palette */
+  --sand: oklch(0.78 0.07 75);            /* #C9A97A */
+  --sand-deep: oklch(0.68 0.10 70);
+  --ivory: oklch(0.96 0.015 80);          /* #F5F0E8 */
+  --charcoal: oklch(0.18 0.005 80);       /* #1A1A18 */
+  --sage: oklch(0.62 0.04 135);           /* #7A8C6E */
+
+  --background: var(--ivory);
+  --foreground: var(--charcoal);
+  --card: oklch(0.99 0.005 80);
+  --card-foreground: var(--charcoal);
+  --popover: var(--ivory);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--sand);
+  --primary-foreground: var(--charcoal);
+  --secondary: var(--sage);
+  --secondary-foreground: var(--ivory);
+  --muted: oklch(0.92 0.012 80);
+  --muted-foreground: oklch(0.42 0.01 80);
+  --accent: var(--sand);
+  --accent-foreground: var(--charcoal);
+  --destructive: oklch(0.55 0.20 27);
+  --destructive-foreground: var(--ivory);
+  --border: oklch(0.88 0.015 80);
+  --input: oklch(0.88 0.015 80);
+  --ring: var(--sand);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Hero Ken Burns slider */
+@keyframes kenburns {
+  0%   { transform: scale(1.05) translate(0, 0); }
+  100% { transform: scale(1.18) translate(-2%, -1%); }
+}
+.kenburns { animation: kenburns 9s ease-out forwards; }
+
+@keyframes slideFade {
+  0%   { opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes drift {
+  0%   { transform: translate(0,0) rotate(0deg); opacity: 0.4; }
+  50%  { transform: translate(20px,-30px) rotate(15deg); opacity: 0.7; }
+  100% { transform: translate(0,0) rotate(0deg); opacity: 0.4; }
+}
+.leaf-drift { animation: drift 12s ease-in-out infinite; }
+
+@keyframes scrollArrow {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50%      { transform: translateY(8px); opacity: 1; }
+}
+.scroll-arrow { animation: scrollArrow 2s ease-in-out infinite; }
+
+/* Wave ripple for beach cards */
+@keyframes wave {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.78 0.07 75 / 0.5); }
+  50%      { box-shadow: 0 0 0 6px oklch(0.78 0.07 75 / 0); }
+}
+.hover-wave:hover { animation: wave 1.6s ease-out infinite; }
+
+/* Leaf shimmer for attractions */
+@keyframes shimmer {
+  0%,100% { filter: brightness(1); }
+  50%     { filter: brightness(1.08); }
+}
+.hover-shimmer:hover img { animation: shimmer 2.4s ease-in-out infinite; }
+
+/* Candle pulse for restaurants */
+@keyframes candle {
+  0%,100% { box-shadow: 0 8px 30px -8px oklch(0.78 0.07 75 / 0.3); }
+  50%     { box-shadow: 0 14px 40px -6px oklch(0.78 0.07 75 / 0.7); }
+}
+.hover-candle:hover { animation: candle 2.2s ease-in-out infinite; }
+
+.tilt-card { transition: transform 0.5s cubic-bezier(.2,.8,.2,1); transform-style: preserve-3d; }
+.tilt-card:hover { transform: perspective(1000px) rotateX(3deg) rotateY(-4deg) translateY(-4px); }
+
+.glass {
+  background: oklch(0.96 0.015 80 / 0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.glass-dark {
+  background: oklch(0.18 0.005 80 / 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Leaflet marker fix */
+.leaflet-container { background: var(--ivory); font-family: var(--font-sans); }
